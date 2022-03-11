@@ -19,7 +19,7 @@ public class MySinglyLinkedList {
         } else {
             newNode = new MyNode(data); // data를 넣고 노드를 생성
             MyNode tmpNode = head; // 임시 노드에 head를 대입
-            while (tmpNode.nextLink != null) { // MyNode type 인스턴스의 다음 인스턴스가 없을 때까지 반복
+            while (tmpNode.nextLink != null) { // tmpNode.nextLink가 null이 아닐 때까지
                 tmpNode = tmpNode.nextLink;
             }
             tmpNode.nextLink = newNode;
@@ -41,8 +41,64 @@ public class MySinglyLinkedList {
                 System.out.println("----------------------------");
             }
         }
+
         size++;
         System.out.println("\"" + data + "\" " + "노드가 추가됐어요.");
+    }
+
+    // 위치 지정 노드 추가
+    public void addPositioningNode(int index, String data) {
+        if (index < 0 || index > size) { // index의 위치가 존재하지 않는다면
+            System.out.println("Check the index position.");
+            return;
+        }
+
+        MyNode tmpNode = head;
+        MyNode newNode = new MyNode(data);
+
+        if (index == 0) {
+            newNode.nextLink = head;
+            head = newNode;
+        } else {
+            MyNode prevNode = null; // 임시로 기존 노드를 담아둔다.
+
+            for (int i = 0; i < index; i++) {
+                prevNode = tmpNode;
+                tmpNode = tmpNode.nextLink;
+            }
+
+            prevNode.nextLink = newNode; // 임시 기존 노드 다음으로 새로운 노드 연결
+            newNode.nextLink = tmpNode; // 새로운 노드 다음으로 임시 기존 노드의 다음 노드 연결
+        }
+
+        size++;
+        System.out.println(index + "번째 index에 \"" + data + "\" " + "노드가 추가됐어요.");
+    }
+
+    // 위치 지정 노드 삭제
+    public void deletePositioningNode(int index) {
+        if (index < 0 || index >= size) { // index의 위치가 존재하지 않는다면
+            System.out.println("Check the index position.");
+            return;
+        }
+
+        MyNode tmpNode = head;
+
+        if (index == 0) {
+            head = head.nextLink;
+        } else {
+            MyNode prevNode = null; // 임시로 기존 노드를 담아둔다.
+
+            for (int i = 0; i < index; i++) {
+                prevNode = tmpNode;
+                tmpNode = tmpNode.nextLink;
+            }
+
+            prevNode.nextLink = tmpNode.nextLink; // 임시 기존 노드 다음으로 다음 노드의 다음 노드 연결
+        }
+
+        size--;
+        System.out.println(index + "번째 index가 삭제됐어요.");
     }
 
     public void showSinglyLinkedList() {
@@ -52,13 +108,15 @@ public class MySinglyLinkedList {
         }
 
         MyNode tmpNode = head;
-        while (tmpNode != null) {
+
+        while (tmpNode != null) { // tmpNode.nextLink가 null이 아닐 때까지
             System.out.print(tmpNode.getData());
             tmpNode = tmpNode.nextLink;
             if (tmpNode != null) {
                 System.out.print("->");
             }
         }
+
         System.out.println("");
     }
 }
