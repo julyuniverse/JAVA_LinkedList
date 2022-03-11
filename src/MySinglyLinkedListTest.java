@@ -5,10 +5,10 @@ public class MySinglyLinkedListTest {
         myLinkedList.addNode("A");
         myLinkedList.addNode("B");
         myLinkedList.addNode("C");
+        myLinkedList.showSinglyLinkedList();
         myLinkedList.addPositioningNode(1, "D");
         myLinkedList.showSinglyLinkedList();
         myLinkedList.deletePositioningNode(3);
-
         myLinkedList.showSinglyLinkedList();
 
         // 결과
@@ -20,6 +20,7 @@ public class MySinglyLinkedListTest {
         // ----------------------------
         // "B" 노드가 추가됐어요.
         // "C" 노드가 추가됐어요.
+        // A->B->C
         // 1번째 index에 "D" 노드가 추가됐어요.
         // A->D->B->C
         // 3번째 index가 삭제됐어요.
